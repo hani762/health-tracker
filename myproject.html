@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Health Tracker</title>
+    <style>
+      #success-msg {
+        text-align: center;
+        color: #1d9e75;
+        font-size: 14px;
+        margin-top: 12px;
+        display: none;
+      }
+      #today-date {
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        margin-top: 4px;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #d3bc72;
+        padding: 20px;
+      }
+      h1 {
+        color: #e24b4a;
+        text-align: center;
+      }
+      .cards-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        justify-content: center;
+        margin-top: 30px;
+      }
+      .card {
+        background-color: white;
+        border-radius: 12px;
+        padding: 20px;
+        width: 160px;
+        text-align: center;
+        border-top: 5px solid #e24b4a;
+      }
+      .card h2 {
+        font-size: 14px;
+        color: #888;
+        margin-bottom: 8px;
+      }
+      .card p {
+        font-size: 22px;
+        font-weight: bold;
+        color: #333;
+      }
+      .Calories {
+        border-top-color: #e24b4a;
+      }
+      .Weight {
+        border-top-color: #7f77dd;
+      }
+      .Steps {
+        border-top-color: #1d9e75;
+      }
+      .Sleep {
+        border-top-color: #378add;
+      }
+      .Heart {
+        border-top-color: #d85a30;
+      } /* orange */
+      .Bp {
+        border-top-color: #d4537e;
+      }
+      .form-container {
+        background-color: white;
+        border-radius: 12px;
+        padding: 24px;
+        max-width: 400px;
+        margin: 30px auto;
+      }
+
+      .form-container h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      .form-group {
+        margin-bottom: 16px;
+      }
+
+      .form-group label {
+        display: block;
+        font-size: 13px;
+        color: #888;
+        margin-bottom: 4px;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 15px;
+      }
+
+      #save-btn {
+        width: 100%;
+        padding: 12px;
+        background-color: #e24b4a;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>My Health Tracker</h1>
+    <p id="today-date"></p>
+    <div class="cards-container">
+      <div class="card Calories">
+        <h2>Calories</h2>
+        <p id="card-calories">0 kcal</p>
+      </div>
+
+      <div class="card Weight">
+        <h2>Weight</h2>
+        <p id="card-weight">0 kg</p>
+      </div>
+
+      <div class="card Steps">
+        <h2>Steps</h2>
+        <p id="card-steps">0 steps</p>
+      </div>
+
+      <div class="card Sleep">
+        <h2>Sleep</h2>
+        <p id="card-sleep">0 hrs</p>
+      </div>
+
+      <div class="card Heart">
+        <h2>Heart Rate</h2>
+        <p id="card-heart">0 bpm</p>
+      </div>
+
+      <div class="card Bp">
+        <h2>Blood Pressure</h2>
+        <p id="card-bp">0/0 mmHg</p>
+      </div>
+    </div>
+    <div class="form-container">
+      <h2>Log Today's Data</h2>
+
+      <div class="form-group">
+        <label>Calories (kcal)</label>
+        <input type="number" id="input-calories" placeholder="e.g. 1800" />
+      </div>
+
+      <div class="form-group">
+        <label>Weight (kg)</label>
+        <input type="number" id="input-weight" placeholder="e.g. 70" />
+      </div>
+
+      <div class="form-group">
+        <label>Steps</label>
+        <input type="number" id="input-steps" placeholder="e.g. 8000" />
+      </div>
+
+      <div class="form-group">
+        <label>Sleep (hours)</label>
+        <input type="number" id="input-sleep" placeholder="e.g. 7.5" />
+      </div>
+
+      <div class="form-group">
+        <label>Heart Rate (bpm)</label>
+        <input type="number" id="input-heart" placeholder="e.g. 72" />
+      </div>
+
+      <div class="form-group">
+        <label>Blood Pressure</label>
+        <input type="text" id="input-bp" placeholder="e.g. 120/80" />
+      </div>
+      <button id="save-btn">Save Entry</button>
+      <p id="success-msg">✅ Data saved successfully!</p>
+    </div>
+    <script>
+      document.getElementById("save-btn").onclick = function () {
+        let calories = document.getElementById("input-calories").value;
+        let weight = document.getElementById("input-weight").value;
+        let steps = document.getElementById("input-steps").value;
+        let sleep = document.getElementById("input-sleep").value;
+        let heart = document.getElementById("input-heart").value;
+        let bp = document.getElementById("input-bp").value;
+
+        localStorage.setItem("calories", calories);
+        localStorage.setItem("weight", weight);
+        localStorage.setItem("steps", steps);
+        localStorage.setItem("sleep", sleep);
+        localStorage.setItem("heart", heart);
+        localStorage.setItem("bp", bp);
+
+        document.getElementById("card-calories").textContent =
+          calories + " kcal";
+        document.getElementById("card-weight").textContent = weight + " kg";
+        document.getElementById("card-steps").textContent = steps + " steps";
+        document.getElementById("card-sleep").textContent = sleep + " hrs";
+        document.getElementById("card-heart").textContent = heart + " bpm";
+        document.getElementById("card-bp").textContent = bp + " mmHg";
+        // Show success message for 2 seconds
+        document.getElementById("success-msg").style.display = "block";
+        setTimeout(function () {
+          document.getElementById("success-msg").style.display = "none";
+        }, 2000);
+      };
+
+      function showDate() {
+        let today = new Date();
+        let options = {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        };
+        let dateString = today.toLocaleDateString("en-IN", options);
+        document.getElementById("today-date").textContent = dateString;
+      }
+
+      showDate();
+      function loadSavedData() {
+        let calories = localStorage.getItem("calories");
+        let weight = localStorage.getItem("weight");
+        let steps = localStorage.getItem("steps");
+        let sleep = localStorage.getItem("sleep");
+        let heart = localStorage.getItem("heart");
+        let bp = localStorage.getItem("bp");
+
+        if (calories)
+          document.getElementById("card-calories").textContent =
+            calories + " kcal";
+        if (weight)
+          document.getElementById("card-weight").textContent = weight + " kg";
+        if (steps)
+          document.getElementById("card-steps").textContent = steps + " steps";
+        if (sleep)
+          document.getElementById("card-sleep").textContent = sleep + " hrs";
+        if (heart)
+          document.getElementById("card-heart").textContent = heart + " bpm";
+        if (bp) document.getElementById("card-bp").textContent = bp + " mmHg";
+      }
+
+      loadSavedData();
+    </script>
+  </body>
+</html>
